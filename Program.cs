@@ -10,12 +10,12 @@ namespace StockApp
     {
         private static SplashKitSDK.Color Background = RGBColor(64, 64, 64);
         public static void Main(){
-            HomePage home = new HomePage("home");
-            FollowPage follow = new FollowPage("follow");
-            DetailPage detail = new DetailPage("detail");
+            Page home = PageFactory.CreatePage("home");
+            Page follow = PageFactory.CreatePage("follow");
+            Page detail = PageFactory.CreatePage("detail");
 
             AppContext context = new AppContext();
-            context.SetState(new HomeState(home, follow,detail));
+            context.SetState(new HomeState((HomePage)home,(FollowPage) follow,(DetailPage)detail));
 
             OpenWindow("Stock App", 800, 600);
             do{
@@ -34,15 +34,15 @@ namespace StockApp
                     switch (nextState)
                     {
                         case Page_type.following:
-                            context.SetState(new FollowState(follow, home, detail));
+                            context.SetState(new FollowState((FollowPage) follow,(HomePage) home,(DetailPage) detail));
                             break;
                         case Page_type.detail:
-                            context.SetState(new DetailState(detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current),home));
+                            context.SetState(new DetailState((DetailPage)detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current),(HomePage)home));
                             break;
                     }
                 }
                 else{
-                    context.SetState(new HomeState(home, follow,detail));
+                    context.SetState(new HomeState((HomePage)home,(FollowPage) follow,(DetailPage)detail));
                 }
                 RefreshScreen();
             } while (!QuitRequested());

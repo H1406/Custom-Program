@@ -41,3 +41,4 @@
 /Users/phanhieu/COS20007/CustomProgram/StockApp/obj/Debug/net9.0/StockApp.genruntimeconfig.cache
 /Users/phanhieu/COS20007/CustomProgram/StockApp/obj/Debug/net9.0/ref/StockApp.dll
 /Users/phanhieu/COS20007/CustomProgram/StockApp/bin/Debug/net9.0/CsvHelper.dll
+/Users/phanhieu/COS20007/CustomProgram/StockApp/obj/Debug/net9.0/StockApp.sourcelink.json
