@@ -4,23 +4,13 @@ using SplashKitSDK;
 using StockApp;
 namespace StockApp;
 // Concrete states
-public class HomeState : IAppState
+public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IAppState
 {
-    private HomePage _home;
-    private FollowPage _follow;
-    private Page_type _nextState;
-    private StockItem _itemSearched;
-    private DetailPage _detail;
-    
-    // private Analyzer analyzer = new Analyzer();
-
-    public HomeState(HomePage home, FollowPage follow, DetailPage detail)
-    {
-        _home = home;
-        _follow = follow;
-        _nextState = Page_type.home; // Default to staying in the same state
-        _detail = detail;
-    }
+    private HomePage _home = home;
+    private FollowPage _follow = follow;
+    private Page_type _nextState = Page_type.home;
+    private StockItem? _itemSearched;
+    private DetailPage _detail = detail;
 
     public void HandleInput()
     {
@@ -34,7 +24,7 @@ public class HomeState : IAppState
             if (itemAdded != null)
             {
                 StockItem stock = new StockItem(itemAdded.Name, itemAdded.X, itemAdded.Y, itemAdded.High, itemAdded.Low, itemAdded.Open, itemAdded.Current);
-                _follow.Stocks.AddStock(stock);
+                _follow.Stocks.AddStock(stock,100);
                 _follow.SaveStock(stock);
             }
             if (itemDeleted != null)
@@ -53,7 +43,7 @@ public class HomeState : IAppState
             _itemSearched = _home.Stocks.StockClicked(MouseX(), MouseY());
             if (ItemSearched != null)
             {
-                _detail.Graph = new Graph(_itemSearched.Name);
+                _detail.Graph = new Graph(_itemSearched.Name,120,300);
                 _detail.Graph.LoadData();
                 _nextState = Page_type.detail;
             }
@@ -66,7 +56,7 @@ public class HomeState : IAppState
             {
                 _home.Fetcher.FetchStockData(searchTerm).Wait();
                 _itemSearched = _home.Fetcher.ItemFound;
-                _home.Stocks.AddStock(_itemSearched);
+                _home.Stocks.AddStock(_itemSearched,100);
             }
             // Console.WriteLine(Analyzer.GetBotResponseAsync("Hello"));
         }

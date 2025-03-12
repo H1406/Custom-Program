@@ -29,13 +29,15 @@ namespace StockApp
                 else if (pageClicked == "follow"){
                     _nextState = Page_type.following;
                 }
-                else if (pageClicked == "analysis"){
-                    _nextState = Page_type.analysis;
+                if (_detail.AnalyzeButton.IsClicked(MouseX(),MouseY())){
+                    _detail.Analyzer.Analyze(_detail.Item.Name);
+                    _detail.PredictGraph = new Graph(_detail.Item.Name,120,550,_detail.Analyzer.PredictedPrices);
+                    Console.WriteLine(_detail.PredictGraph.GetLength());
+                    
                 }
             }
         }
         public void Update(){
-            
         }
         public Page_type NextState{
             get=> _nextState;

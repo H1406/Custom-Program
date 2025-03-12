@@ -5,7 +5,7 @@ public class Scrollbar:Item{
     private float HeightLimit = 560;
     private float lastY;
     
-    public Scrollbar(string name,float x, float y):base(name,x,y){
+    public Scrollbar(float x, float y):base(x,y){
         Width = 10;
         Height = 40;
     }

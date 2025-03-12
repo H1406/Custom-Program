@@ -50,7 +50,7 @@ namespace StockApp
                 _itemSearched = _follow.Stocks.StockClicked(MouseX(), MouseY());
                 if (_itemSearched != null)
                 {
-                    _detail.Graph = new Graph(_itemSearched.Name);
+                    _detail.Graph = new Graph(_itemSearched.Name,120,300);
                     _detail.Graph.LoadData();
                     _nextState = Page_type.detail;
                 }

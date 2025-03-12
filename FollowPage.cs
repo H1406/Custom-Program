@@ -4,19 +4,19 @@ using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.Data.Sqlite;
 public class FollowPage : Page{
-    private DatabaseManager manager = new DatabaseManager();
+    private DatabaseManager _manager = new DatabaseManager();
     private StockSession _stocks = new StockSession();
 
-    public FollowPage(string title) : base(title){
+    public FollowPage(){
         Load();
     }
     public void Load(){
-        manager.LoadData().Wait();
-        Console.WriteLine(manager.Stocks.Count());
-        _stocks.LoadStocks(manager.Stocks);
+        _manager.LoadData().Wait();
+        _stocks.LoadStocks(_manager.Stocks);
     }
 
     public override void Draw(){
+        Update();
         NavigationBar.Draw();
         ScrollBar.Draw();
         _stocks.Draw();
@@ -27,10 +27,13 @@ public class FollowPage : Page{
                 return;
             }
         }
-        manager.SaveStock(stock);
+        _manager.SaveStock(stock);
+    }
+    public void Update(){
+        _stocks.Update(ScrollBar.GetScrollValue());
     }
     
     public StockSession Stocks{get=>_stocks;}
-    public DatabaseManager Manager{get=>manager;}
+    public DatabaseManager Manager{get=>_manager;}
 
 }

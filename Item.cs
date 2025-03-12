@@ -12,6 +12,11 @@ public abstract class Item{
         _y = y;
         _name = name;
     }
+    public Item(float x,float y){
+        _name = "default";
+        _x = x;
+        _y = y;
+    }
     public abstract void Draw();
     public float X{
         get{

@@ -8,7 +8,7 @@ public class NavigationBar:Item
     private Button analysisButton = new Button("analysis",15,360,"images/analysis.png");
     private List<Button> buttons = new List<Button>();
 
-    public NavigationBar(string title,float x, float y):base(title,x,y){
+    public NavigationBar(float x, float y):base(x,y){
         buttons.Add(homeButton);
         buttons.Add(analysisButton);
         buttons.Add(followingButton);

@@ -15,7 +15,7 @@ public class StockSession
         }
         return null;
     }
-   public void AddStock(StockItem stock)
+   public void AddStock(StockItem stock, float initialY)
     {
         if (stock == null)
         {
@@ -35,7 +35,7 @@ public class StockSession
         foreach (StockItem _stock in _stocks)
         {
             _stock.X = 110;
-            _stock.Y = _stocks.IndexOf(_stock) * 20 + 100;
+            _stock.Y = _stocks.IndexOf(_stock) * 20 + initialY;
             buttons.AddButton(_stock);
         }
     }
@@ -47,7 +47,6 @@ public class StockSession
         {
             throw new ArgumentNullException(nameof(stocks), "Stocks list cannot be null.");
         }
-
         _stocks.Clear();
         for (int i = 0; i < stocks.Count; i++)
         {
@@ -55,7 +54,7 @@ public class StockSession
             {
                 throw new ArgumentNullException(nameof(stocks), "StockItem in the list cannot be null.");
             }
-            AddStock(stocks[i]);
+            AddStock(stocks[i], 10);
         }
     }
     public void Draw(){

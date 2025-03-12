@@ -3,13 +3,13 @@ public class PageFactory{
         Page page = null;
         switch(type){
             case "home":
-                page = new HomePage("Home");
+                page = new HomePage();
                 break;
             case "detail":
-                page = new DetailPage("Detail");
+                page = new DetailPage();
                 break;
             case "follow":
-                page = new FollowPage("Follow");
+                page = new FollowPage();
                 break;
         }
         return page;
