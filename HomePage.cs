@@ -9,7 +9,7 @@ public class HomePage:Page{
     private string[] topStocks = ["AAPL","GOOG","TSLA","AMZN","EBAY","NVDA","META"];
 
     public HomePage(){
-        // Load();
+        Load();
         Stocks.AddStock(sample, 70);
     }
     public override void Draw(){
