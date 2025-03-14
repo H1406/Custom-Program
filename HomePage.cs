@@ -1,4 +1,5 @@
 using System;
+using SplashKitSDK;
 using static SplashKitSDK.SplashKit;
 public class HomePage:Page{
     private StockSession _stockSession = new StockSession();
@@ -16,7 +17,18 @@ public class HomePage:Page{
         NavigationBar.Draw();
         if (_isLoading){
             DrawText("Loading...",ColorWhite(),"Arial",100, 400, 250);
-        }else _stockSession.Draw();
+        }else{
+            Rectangle subWindow = new Rectangle(){
+                X = 110,
+                Y = 60,
+                Width = 680,
+                Height = 500,
+            };
+            SetClip(subWindow);
+            DrawRectangle(ColorBlack(), subWindow);
+            _stockSession.Draw();
+            ResetClip();
+        }
         _searchBar.Draw();
     }
     public void Update(){

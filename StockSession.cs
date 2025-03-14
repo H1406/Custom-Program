@@ -34,7 +34,7 @@ public class StockSession
         buttons.Clear();
         foreach (StockItem _stock in _stocks)
         {
-            _stock.X = 110;
+            _stock.X = 120;
             _stock.Y = _stocks.IndexOf(_stock) * 20 + initialY;
             buttons.AddButton(_stock);
         }
@@ -54,7 +54,7 @@ public class StockSession
             {
                 throw new ArgumentNullException(nameof(stocks), "StockItem in the list cannot be null.");
             }
-            AddStock(stocks[i], 10);
+            AddStock(stocks[i],50);
         }
     }
     public void Draw(){

@@ -1,5 +1,5 @@
 using System;
-using System.Security.Cryptography.X509Certificates;
+// using System.Security.Cryptography.X509Certificates;
 using static SplashKitSDK.SplashKit;
 using SplashKitSDK;
 
@@ -13,7 +13,6 @@ public class DetailPage:Page{
 
     public override void Draw(){
         SetUp();
-        ScrollBar.Draw();
         NavigationBar.Draw();
         _item.Draw();
         Analyze.Draw();
@@ -28,6 +27,7 @@ public class DetailPage:Page{
             DrawRectangle(ColorBlack(), subWindow);
             _graph.Draw();
             ResetClip();
+            _graph.ScrollBar.Draw();
         }
         if(_predictGraph != null){
             Rectangle subWindow1 = new Rectangle(){
@@ -40,6 +40,7 @@ public class DetailPage:Page{
             DrawRectangle(ColorBlack(), subWindow1);
             _predictGraph.Draw();
             ResetClip();
+            _predictGraph.ScrollBar.Draw();
         }
     }
     public StockItem Item{

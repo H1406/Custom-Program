@@ -63,7 +63,7 @@ namespace StockApp
         }
         public void Update()            
         {
-            
+            _follow.Update();
         }
         public Page_type NextState => _nextState;
         public StockItem GetItem(){

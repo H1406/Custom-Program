@@ -1,12 +1,14 @@
 using static SplashKitSDK.SplashKit;
 using System.Globalization;
 using CsvHelper;
+using SplashKitSDK;
 
 using System;
 using System.Drawing;
 public class Graph : Item
 {
     private List<double> prices = new List<double>();
+    private IScrollBar _scrollBar;
     private double maxPrice = 0;
     private double minPrice = 0;
 
@@ -15,20 +17,22 @@ public class Graph : Item
         LoadData();
         Height = 200;
         Width = 5;
+        _scrollBar = new HorizontalScrollBar(X+360,Y,(int)X,(int)X+360);
     }
     public Graph(string symbol,float x, float y , double[] predictedPrices):base(symbol,x,y){
         LoadPredictedData(predictedPrices);
         LoadData();
         Height = 200;
         Width = 5;
+        _scrollBar = new HorizontalScrollBar(X+360,Y,(int)X,(int)X+360);
     }
     public override void Draw()
     {
         for (int i = 0; i < prices.Count-1 ; i++)
         {
             double y1 = prices[i];
-            double x1 = X+420 - i * Width;
-            double x2 = X+420 - (i+1) * Width;
+            double x1 = X+420 - i * Width-(_scrollBar.GetScrollValue()-1)*1000;
+            double x2 = X+420 - (i+1) * Width-(_scrollBar.GetScrollValue()-1)*1000;
             double y2 = prices[i+1];
             if(y1 > y2){
             DrawLine(ColorGreen(), x1, Y - (y1-minPrice) / (maxPrice-minPrice) * Height, x2, Y - (y2-minPrice) / (maxPrice-minPrice) * Height);
@@ -37,7 +41,8 @@ public class Graph : Item
             }else DrawLine(RGBColor(0,216,255), x1, Y - (y1-minPrice) / (maxPrice-minPrice) * Height, x2, Y - (y2-minPrice) / (maxPrice-minPrice) * Height);
         }
     }
-
+    public void Update(){
+    }
     public void LoadData()
     {
         using (var reader = new StreamReader($"Historical Prices/{Name}.csv"))
@@ -67,6 +72,7 @@ public class Graph : Item
     public int GetLength(){
         return prices.Count;
     }
+    public IScrollBar ScrollBar{get=>_scrollBar;}
 }
 public class StockData
 {

@@ -16,7 +16,6 @@ public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IA
     {
         if (MouseClicked(MouseButton.LeftButton))
         {
-            _home.ScrollBar.IsClicked(MouseX(), MouseY());
             _home.SearchBar.IsClicked(MouseX(), MouseY());
 
             StockItem itemAdded = _home.Stocks.Buttons.StockAdd(MouseX(), MouseY());
@@ -24,8 +23,10 @@ public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IA
             if (itemAdded != null)
             {
                 StockItem stock = new StockItem(itemAdded.Name, itemAdded.X, itemAdded.Y, itemAdded.High, itemAdded.Low, itemAdded.Open, itemAdded.Current);
-                _follow.Stocks.AddStock(stock,100);
                 _follow.SaveStock(stock);
+                _follow.Stocks.AddStock(stock,50);
+                Console.WriteLine($"Stock {stock.Name} added to following!");
+                Console.WriteLine($"Stock {stock.Name} saved successfully!");
             }
             if (itemDeleted != null)
             {
