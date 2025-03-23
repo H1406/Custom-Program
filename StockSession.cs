@@ -34,8 +34,8 @@ public class StockSession
         buttons.Clear();
         foreach (StockItem _stock in _stocks)
         {
-            _stock.X = 120;
-            _stock.Y = _stocks.IndexOf(_stock) * 20 + initialY;
+            _stock.X = 100;
+            _stock.Y = _stocks.IndexOf(_stock) * 50 + initialY;
             buttons.AddButton(_stock);
         }
     }
@@ -62,6 +62,11 @@ public class StockSession
             stock.Draw();
         }
         buttons.Draw();
+    }
+    public void DrawWithNoButtons(){
+        foreach(StockItem stock in _stocks){
+            stock.Draw();
+        }
     }
     public void Update(float delta){
         foreach(StockItem stock in _stocks){

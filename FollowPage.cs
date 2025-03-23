@@ -7,9 +7,22 @@ using SplashKitSDK;
 public class FollowPage : Page{
     private DatabaseManager _manager = new DatabaseManager();
     private StockSession _stocks = new StockSession();
+    private static FollowPage _instance;
+    private static object _lock = new object();
+
+    public static FollowPage GetInstance(){
+        if (_instance == null){
+            lock (_lock){
+                if (_instance == null){
+                    _instance = new FollowPage();
+                }
+            }
+        }
+        return _instance;
+    }
 
     public FollowPage(){
-        Load();
+        // Load();
     }
     public void Load(){
         _manager.LoadData().Wait();
@@ -41,7 +54,8 @@ public class FollowPage : Page{
         Console.WriteLine($"Stock {stock.Name} saved successfully!");
         _manager.SaveStock(stock);
     }
-    public void Update(){
+    public override void Update(){
+        ScrollBar.Update();
         _stocks.Update(ScrollBar.GetScrollValue());
     }
     

@@ -5,7 +5,7 @@ namespace StockApp
     {
         home,
         detail,
-        analysis,
+        wallet,
         following
     }
 }

@@ -55,7 +55,7 @@ public class Analyzer{
                 lstm.UpdateWeights(dWf, dWi, dWc, dWo, dbf, dbi, dbc, dbo, learningRate);
             }
 
-            Console.WriteLine($"Epoch {epoch + 1}, Loss: {totalLoss / sequences.Length}");
+            // Console.WriteLine($"Epoch {epoch + 1}, Loss: {totalLoss / sequences.Length}");
         }
         double[] lastSequence = normalizedPrices.Skip(normalizedPrices.Length - sequenceLength).ToArray();
 

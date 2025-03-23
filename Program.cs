@@ -13,7 +13,7 @@ namespace StockApp
             Page home = PageFactory.CreatePage("home");
             Page follow = PageFactory.CreatePage("follow");
             Page detail = PageFactory.CreatePage("detail");
-
+            Page wallet = PageFactory.CreatePage("wallet");
             AppContext context = new AppContext();
             context.SetState(new HomeState((HomePage)home,(FollowPage) follow,(DetailPage)detail));
 
@@ -37,7 +37,10 @@ namespace StockApp
                             context.SetState(new FollowState((FollowPage) follow,(HomePage) home,(DetailPage) detail));
                             break;
                         case Page_type.detail:
-                            context.SetState(new DetailState((DetailPage)detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current),(HomePage)home));
+                            context.SetState(new DetailState((DetailPage)detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current),(FollowPage)follow,(WalletPage)wallet));
+                            break;
+                        case Page_type.wallet:
+                            context.SetState(new WalletState((HomePage) home,(WalletPage)wallet,(FollowPage) follow));
                             break;
                     }
                 }

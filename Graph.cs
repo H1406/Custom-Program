@@ -17,22 +17,24 @@ public class Graph : Item
         LoadData();
         Height = 200;
         Width = 5;
-        _scrollBar = new HorizontalScrollBar(X+360,Y,(int)X,(int)X+360);
+        _scrollBar = new HorizontalScrollBar(X+360,Y-5,(int)X,(int)X+360);
+        Console.WriteLine(prices.Count);
     }
     public Graph(string symbol,float x, float y , double[] predictedPrices):base(symbol,x,y){
         LoadPredictedData(predictedPrices);
         LoadData();
         Height = 200;
         Width = 5;
-        _scrollBar = new HorizontalScrollBar(X+360,Y,(int)X,(int)X+360);
+        _scrollBar = new HorizontalScrollBar(X+360,Y-5,(int)X,(int)X+360);
+        Console.WriteLine(prices.Count);
     }
     public override void Draw()
     {
         for (int i = 0; i < prices.Count-1 ; i++)
         {
             double y1 = prices[i];
-            double x1 = X+420 - i * Width-(_scrollBar.GetScrollValue()-1)*1000;
-            double x2 = X+420 - (i+1) * Width-(_scrollBar.GetScrollValue()-1)*1000;
+            double x1 = X+420 - i * Width-(_scrollBar.GetScrollValue()-1)*prices.Count*Width;
+            double x2 = X+420 - (i+1) * Width-(_scrollBar.GetScrollValue()-1)*prices.Count*Width;
             double y2 = prices[i+1];
             if(y1 > y2){
             DrawLine(ColorGreen(), x1, Y - (y1-minPrice) / (maxPrice-minPrice) * Height, x2, Y - (y2-minPrice) / (maxPrice-minPrice) * Height);
@@ -42,6 +44,7 @@ public class Graph : Item
         }
     }
     public void Update(){
+        _scrollBar.Update();
     }
     public void LoadData()
     {

@@ -31,9 +31,9 @@ namespace StockApp
                 {
                     _nextState = Page_type.home;
                 }
-                else if (pageClicked == "analysis")
+                else if (pageClicked == "wallet")
                 {
-                    _nextState = Page_type.analysis;
+                    _nextState = Page_type.wallet;
                 }
 
                 StockItem stock = _follow.Stocks.StockClicked(MouseX(), MouseY());
@@ -51,7 +51,6 @@ namespace StockApp
                 if (_itemSearched != null)
                 {
                     _detail.Graph = new Graph(_itemSearched.Name,120,300);
-                    _detail.Graph.LoadData();
                     _nextState = Page_type.detail;
                 }
             }

@@ -7,8 +7,8 @@ public class ButtonSession{
     public ButtonSession(){
     }
     public void AddButton(StockItem stock){
-        AddButton add_button = new AddButton(stock.Name,720,stock.Y-5,"images/add.png",stock);
-        DeleteButton del_button = new DeleteButton(stock.Name,755,stock.Y-5,"images/delete.png",stock);
+        AddButton add_button = new AddButton(stock.Name,720,stock.Y+17,"images/add.png",stock);
+        DeleteButton del_button = new DeleteButton(stock.Name,755,stock.Y+17,"images/delete.png",stock);
         _addbuttons.Add(add_button);
         _delbuttons.Add(del_button);
     }
@@ -16,7 +16,6 @@ public class ButtonSession{
         foreach(AddButton button in _addbuttons){
             if(button.Item == stock){
                 _addbuttons.Remove(button);
-                // FreeBitmap(button.BMP);
                 break;
             }
         }
@@ -36,7 +35,6 @@ public class ButtonSession{
             if(button.IsClicked(x,y)){
                 RemoveButton(button.Item as StockItem);
                 _delbuttons.Remove(button);
-                // FreeBitmap(button.BMP);
                 return button.Item as StockItem;
             }
         }

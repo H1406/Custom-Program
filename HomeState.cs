@@ -37,29 +37,27 @@ public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IA
             {
                 _nextState = Page_type.following;
             }
-            else if (pageClicked == "analysis")
+            else if (pageClicked == "wallet")
             {
-                _nextState = Page_type.analysis;
+                _nextState = Page_type.wallet;
             }
             _itemSearched = _home.Stocks.StockClicked(MouseX(), MouseY());
             if (ItemSearched != null)
             {
                 _detail.Graph = new Graph(_itemSearched.Name,120,300);
-                _detail.Graph.LoadData();
                 _nextState = Page_type.detail;
             }
         }
 
         if (KeyTyped(KeyCode.ReturnKey))
         {
-            string searchTerm = _home.SearchBar.SearchTerm;
+            string searchTerm = _home.SearchBar.InputTerm;
             if (searchTerm != null)
             {
                 _home.Fetcher.FetchStockData(searchTerm).Wait();
                 _itemSearched = _home.Fetcher.ItemFound;
-                _home.Stocks.AddStock(_itemSearched,100);
+                _home.Stocks.AddStock(_itemSearched,52);
             }
-            // Console.WriteLine(Analyzer.GetBotResponseAsync("Hello"));
         }
     }
 
@@ -72,7 +70,7 @@ public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IA
         _home.Update();
     }
     public Page_type NextState => _nextState;
-    public string SearchTerm => _home.SearchBar.SearchTerm;
+    public string SearchTerm => _home.SearchBar.InputTerm;
     public StockItem ItemSearched => _itemSearched;
     public StockItem GetItem(){
         return _itemSearched;

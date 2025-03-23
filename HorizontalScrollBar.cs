@@ -14,8 +14,7 @@ public class HorizontalScrollBar : Item, IScrollBar{
         this.WidthMax = WidthMax;
     }
     public override void Draw(){
-        Update();
-        FillRectangle(ColorWhite(), X, Y, Width, Height);
+        FillRectangle(RGBColor(128,128,128), X, Y, Width, Height);
     }
     public void Update(){
         HandleMouseInput();

@@ -7,9 +7,10 @@ public class StockItem:Item{
     private double _low;
     private double _open;
     private double _current;
+    private int _quantity = 0;
     public StockItem(string symbol,float x, float y,double high, double low,double open, double current):base(symbol,x,y){
-        Width = 20;
-        Height = 20;
+        Width = 680;
+        Height = 50;
         _high = high;
         _low = low;
         _open = open;
@@ -17,11 +18,14 @@ public class StockItem:Item{
     }
     public override void Draw()
     {
-        DrawText(Name,ColorWhite(),FontName,TextSize, X, Y);
-        DrawText($"High: {_high}",ColorWhite(),FontName,TextSize, X+50, Y);
-        DrawText($"Low: {_low}",ColorWhite(),FontName,TextSize, X+200, Y);
-        DrawText($"Open: {_open}",ColorWhite(),FontName,TextSize, X+320, Y);
-        DrawText($"Current: {_current}",ColorWhite(),FontName,TextSize, X+480, Y);
+        if (IsHovered()){
+            FillRectangle(RGBColor(128,128,128), X, Y, Width, Height);
+        }
+        DrawText(Name,ColorWhite(),FontName,TextSize, X+20, Y+20);
+        DrawText($"High: {_high}",ColorWhite(),FontName,TextSize, X+70, Y+20);
+        DrawText($"Low: {_low}",ColorWhite(),FontName,TextSize, X+220, Y+20);
+        DrawText($"Open: {_open}",ColorWhite(),FontName,TextSize, X+340, Y+20);
+        DrawText($"Current: {_current}",ColorWhite(),FontName,TextSize, X+500, Y+20);
     }
     public double Current{
         get{
@@ -41,6 +45,14 @@ public class StockItem:Item{
     public double Open{
         get{
             return _open;
+        }
+    }
+    public int Quantity{
+        get{
+            return _quantity;
+        }
+        set{
+            _quantity = value;
         }
     }
 }

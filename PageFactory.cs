@@ -3,13 +3,16 @@ public class PageFactory{
         Page page = null;
         switch(type){
             case "home":
-                page = new HomePage();
+                page = HomePage.GetInstance();
                 break;
             case "detail":
-                page = new DetailPage();
+                page = DetailPage.GetInstance();
                 break;
             case "follow":
-                page = new FollowPage();
+                page = FollowPage.GetInstance();
+                break;
+            case "wallet":
+                page = WalletPage.GetInstance();
                 break;
         }
         return page;

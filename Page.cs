@@ -8,6 +8,7 @@ public abstract class Page{
     public Page(){
      }
     public abstract void Draw();
+    public abstract void Update();
     
     public NavigationBar NavigationBar{
         get { return _navBar; }

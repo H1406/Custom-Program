@@ -12,7 +12,8 @@ public class DatabaseManager
             connection.Open();
             string tableCommand = @"CREATE TABLE IF NOT EXISTS StockData (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                symbol TEXT NOT NULL
+                symbol TEXT NOT NULL,
+                amount INTEGER
                 )";
             using(var command = new SqliteCommand(tableCommand, connection)){
                 command.ExecuteNonQuery();
@@ -63,6 +64,35 @@ public class DatabaseManager
                         _stocks.Add(_fetcher.ItemFound);
                     }
                 }
+            }
+        }
+    }
+    public async Task GetWallet(){
+        using(var connection = new SqliteConnection($"Data Source={DatabaseFile}")){
+            connection.Open();
+            string selectCommand = @"SELECT symbol FROM StockData WHERE amount > 0";
+            using(var command = new SqliteCommand(selectCommand, connection)){
+                using(var reader = command.ExecuteReader()){
+                    while(reader.Read()){
+                        string symbol = reader.GetString(0);
+                        await _fetcher.FetchStockData(symbol);
+                        if(_fetcher.ItemFound == null){
+                            Console.WriteLine($"No data found for {symbol}");
+                        }
+                        _stocks.Add(_fetcher.ItemFound);
+                    }
+                }
+            }
+        }
+    }
+    public void SaveWallet(StockItem stock){
+        using(var connection = new SqliteConnection($"Data Source={DatabaseFile}")){
+            connection.Open();
+            string updateCommand = @"Update StockData SET amount = @amount WHERE symbol = @symbol";
+            using(var command = new SqliteCommand(updateCommand, connection)){
+                command.Parameters.AddWithValue("@amount", stock.Quantity);
+                command.Parameters.AddWithValue("@symbol", stock.Name);
+                command.ExecuteNonQuery();
             }
         }
     }

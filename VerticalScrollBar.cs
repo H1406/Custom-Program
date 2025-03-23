@@ -14,8 +14,7 @@ public class VerticalScrollbar:Item,IScrollBar{
     }
     public override void Draw()
     {
-        Update();
-        FillRectangle(ColorWhite(), X, Y, Width, Height);
+        FillRectangle(RGBColor(128,128,128), X, Y, Width, Height);
     }
     public void HandleMouseInput(){
         lastY = Y;

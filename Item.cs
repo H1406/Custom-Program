@@ -1,5 +1,6 @@
 using System;
 using static SplashKitSDK.SplashKit;
+using SplashKitSDK;
 
 public abstract class Item{
     private string _name;
@@ -16,6 +17,12 @@ public abstract class Item{
         _name = "default";
         _x = x;
         _y = y;
+    }
+    public Item(float x, float y, int width, int height){
+        _x = x;
+        _y = y;
+        _width = width;
+        _height = height;
     }
     public abstract void Draw();
     public float X{
@@ -41,6 +48,14 @@ public abstract class Item{
         set{
             _name = value;
         }
+    }
+    public virtual bool IsHovered(){
+        float mousex = MouseX();
+        float mousey = MouseY();
+        if( mousex >= X && mousex <= Width + X && mousey >= Y && mousey <= Y + Height){
+            return true;
+        }
+        return false;
     }
     public int Height{get=>_height;set=>_height = value;}
     public int Width{get=>_width;set=>_width = value;}
