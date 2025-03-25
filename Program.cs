@@ -40,7 +40,7 @@ namespace StockApp
                             context.SetState(new DetailState((DetailPage)detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current),(FollowPage)follow,(WalletPage)wallet));
                             break;
                         case Page_type.wallet:
-                            context.SetState(new WalletState((HomePage) home,(WalletPage)wallet,(FollowPage) follow));
+                            context.SetState(new WalletState((WalletPage)wallet));
                             break;
                     }
                 }

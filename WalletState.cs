@@ -2,13 +2,14 @@ using StockApp;
 using static SplashKitSDK.SplashKit;
 using SplashKitSDK;
 
-public class WalletState(HomePage home, WalletPage wallet, FollowPage follow):IAppState{
+public class WalletState(WalletPage wallet):IAppState{
     private WalletPage _wallet = wallet;
-    private HomePage _home = home;
-    private FollowPage _follow = follow;
+    private StockItem? itemClicked = null;
     private Page_type _nextState = Page_type.wallet;
     public void HandleInput(){
         if (MouseClicked(MouseButton.LeftButton)){
+            itemClicked = _wallet.Stocks.StockClicked(MouseX(),MouseY());
+            if(itemClicked != null) _nextState = Page_type.detail;
             if(_wallet.Deposit.IsClicked(MouseX(),MouseY())) _wallet.Withdraw.IsSelected = false;
             if(_wallet.Withdraw.IsClicked(MouseX(),MouseY())) _wallet.Deposit.IsSelected = false;
             string pageClicked = _wallet.NavigationBar.PageClicked();
@@ -43,6 +44,6 @@ public class WalletState(HomePage home, WalletPage wallet, FollowPage follow):IA
         get=> _nextState;
     }
     public StockItem GetItem(){
-        return null;
+        return itemClicked;
     }
 }

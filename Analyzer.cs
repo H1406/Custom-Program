@@ -1,6 +1,7 @@
 
 public class Analyzer{
     private double[] predictedPrices = new double[10];
+    private TradingContext _tradingContext = new TradingContext();
     public Analyzer(){
     }
     public void Analyze(string symbol){
@@ -78,9 +79,27 @@ public class Analyzer{
             Console.WriteLine($"Day {i + 1}: {predictedPrices[i]:F2}");
         }
     }
+    
     static double ComputeMeanSquaredError(double predicted, double actual)
     {
         return Math.Pow(predicted - actual, 2);
-    }   
+    }  
+    public string ExecuteStrategy(double currentPrice){
+        _tradingContext = new TradingContext();
+        double avgFuturePrice = predictedPrices.Average(); // Compute only once!
+        if (avgFuturePrice > currentPrice * 1.05)
+        {
+            _tradingContext.SetStrategy(new BuyStrategy());
+        }
+        else if (avgFuturePrice < currentPrice * 0.95)
+        {
+            _tradingContext.SetStrategy(new SellStrategy());
+        }
+        else
+        {
+            _tradingContext.SetStrategy(new HoldStrategy());
+        }
+        return _tradingContext.ExecuteStrategy(avgFuturePrice, currentPrice);
+    } 
     public double[] PredictedPrices{get => predictedPrices;}
 }

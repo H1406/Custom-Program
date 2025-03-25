@@ -59,6 +59,7 @@ public class DetailPage:Page{
             _predictGraph.Draw();
             ResetClip();
             _predictGraph.ScrollBar.Draw();
+            DrawText(_analyzer.ExecuteStrategy(_item.Current),ColorWhite(),"Arial",20, 110, 575);
         }
         if(_isBuy||_isSell){
             transaction.Draw();

@@ -34,7 +34,7 @@ public class WalletPage:Page{
         };
         SetClip(subWindow);
         DrawRectangle(ColorBlack(), subWindow);
-        _stockSession.Draw();
+        _stockSession.DrawWithNoButtons();
         ResetClip();
         wallet.Draw();
         _depositbutton.Draw();
@@ -71,6 +71,9 @@ public class WalletPage:Page{
     }
     public string InputTerm{
         get=>_inputTerm.InputTerm;
+    }
+    public StockSession Stocks{
+        get=>_stockSession;
     }
     public Wallet Wallet{get=>wallet;}
 }

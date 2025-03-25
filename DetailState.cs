@@ -35,7 +35,7 @@ namespace StockApp
                 }
                 if (_detail.AnalyzeButton.IsClicked(MouseX(),MouseY())){
                     _detail.Analyzer.Analyze(_detail.Item.Name);
-                    _detail.PredictGraph = new Graph(_detail.Item.Name,120,550,_detail.Analyzer.PredictedPrices);                    
+                    _detail.PredictGraph = new Graph(_detail.Item.Name,120,550,_detail.Analyzer.PredictedPrices);               
                 }
                 if (!_detail.IsBuy || !_detail.IsSell){
                     if (_detail.BuyButton.IsClicked(MouseX(),MouseY())){
