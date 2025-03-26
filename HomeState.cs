@@ -44,6 +44,14 @@ public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IA
             _itemSearched = _home.Stocks.StockClicked(MouseX(), MouseY());
             if (ItemSearched != null)
             {
+                foreach (StockItem stock in _follow.Stocks.Stocks)
+                {
+                    if (stock.Name == _itemSearched.Name)
+                    {
+                        _itemSearched.Quantity = stock.Quantity;
+                        break;
+                    }
+                }
                 _detail.Graph = new Graph(_itemSearched.Name,120,300);
                 _nextState = Page_type.detail;
             }
@@ -54,9 +62,10 @@ public class HomeState(HomePage home, FollowPage follow, DetailPage detail) : IA
             string searchTerm = _home.SearchBar.InputTerm;
             if (searchTerm != null)
             {
-                _home.Fetcher.FetchStockData(searchTerm).Wait();
-                _itemSearched = _home.Fetcher.ItemFound;
-                _home.Stocks.AddStock(_itemSearched,52);
+                _itemSearched = _home.Manager.LoadStock(searchTerm);
+                if(_itemSearched == null){
+                    FadeMusicIn(new Music("invalid","invalid.mp3"),1000);
+                }else _home.Stocks.AddStock(_itemSearched,52);
             }
         }
     }

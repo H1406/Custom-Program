@@ -13,7 +13,7 @@ public class DatabaseManager
             string tableCommand = @"CREATE TABLE IF NOT EXISTS StockData (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 symbol TEXT NOT NULL,
-                amount INTEGER
+                amount INTEGER NOT NULL
                 )";
             using(var command = new SqliteCommand(tableCommand, connection)){
                 command.ExecuteNonQuery();
@@ -52,12 +52,17 @@ public class DatabaseManager
     public async Task LoadData(){
         using(var connection = new SqliteConnection($"Data Source={DatabaseFile}")){
             connection.Open();
-            string selectCommand = @"SELECT symbol FROM StockData";
+            string selectCommand = @"SELECT symbol,amount FROM StockData";
             using(var command = new SqliteCommand(selectCommand, connection)){
                 using(var reader = command.ExecuteReader()){
                     while(reader.Read()){
                         string symbol = reader.GetString(0);
+                        int amount = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);
                         await _fetcher.FetchStockData(symbol);
+                        _fetcher.ItemFound.Quantity = amount;
+                        if (_fetcher.ItemFound.Quantity > 0){
+                            Console.WriteLine($"Stock {symbol} loaded successfully!");
+                        }
                         if(_fetcher.ItemFound == null){
                             Console.WriteLine($"No data found for {symbol}");
                         }
@@ -95,6 +100,10 @@ public class DatabaseManager
                 command.ExecuteNonQuery();
             }
         }
+    }
+    public StockItem LoadStock(string symbol){
+        _fetcher.FetchStockData(symbol).Wait();
+        return _fetcher.ItemFound;
     }
     public List<StockItem> Stocks{get=>_stocks;}
 }

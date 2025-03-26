@@ -77,7 +77,7 @@ public class DetailPage:Page{
     }
 
     public void SetUp(){
-        _item.X = 150;
+        _item.X = 120;
         _item.Y = 20;
     }
     public Graph PredictGraph{get=> _predictGraph; set=> _predictGraph = value;}

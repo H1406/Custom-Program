@@ -5,7 +5,7 @@ public class HomePage:Page{
     private StockSession _stockSession = new StockSession();
     private TextInput _searchBar = new TextInput( 350, 10,200,22);
     private bool _isLoading = false;
-    private StockItem sample = new StockItem("AAPL", 100, 100, 100, 100, 100, 100);
+    private StockItem sample = new StockItem("TSLA", 100, 100, 100, 100, 100, 100);
     private string[] topStocks = ["AAPL","GOOG","TSLA","AMZN","EBAY","NVDA","META"];
     private static HomePage _instance;
     private static readonly object _lock = new object();
@@ -47,11 +47,10 @@ public class HomePage:Page{
         _stockSession.Update(ScrollBar.GetScrollValue());
         ScrollBar.Update();
     }
-    public async void Load(){
+    public void Load(){
         _isLoading = true;
         foreach (string stock in topStocks){
-            await Fetcher.FetchStockData(stock);
-            Stocks.AddStock(Fetcher.ItemFound, 0);
+            Stocks.AddStock(Manager.LoadStock(stock), 0);
         }
         _isLoading = false;
     }

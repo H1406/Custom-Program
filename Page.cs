@@ -3,7 +3,7 @@ using static SplashKitSDK.SplashKit;
 public abstract class Page{
     private NavigationBar _navBar = new NavigationBar(100, 0);  
     private VerticalScrollbar _scrollBar = new VerticalScrollbar( 790, 0);
-    private StockFetcher _fetcher = new StockFetcher();
+    private DatabaseManager _manager = new DatabaseManager();
  
     public Page(){
      }
@@ -16,7 +16,7 @@ public abstract class Page{
     public VerticalScrollbar ScrollBar{
         get { return _scrollBar; }
     }
-    public StockFetcher Fetcher{
-        get { return _fetcher; }
+    public DatabaseManager Manager{
+        get { return _manager; }
     }
 }

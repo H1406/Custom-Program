@@ -16,6 +16,15 @@ public class StockItem:Item{
         _open = open;
         _current = current;
     }
+    public StockItem(string symbol,float x, float y,double high, double low,double open, double current,int quantity):base(symbol,x,y){
+        Width = 680;
+        Height = 50;
+        _high = high;
+        _low = low;
+        _open = open;
+        _current = current;
+        _quantity = quantity;
+    }
     public override void Draw()
     {
         if (IsHovered()){

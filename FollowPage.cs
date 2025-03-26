@@ -22,7 +22,7 @@ public class FollowPage : Page{
     }
 
     public FollowPage(){
-        // Load();
+        Load();
     }
     public void Load(){
         _manager.LoadData().Wait();
@@ -60,6 +60,5 @@ public class FollowPage : Page{
     }
     
     public StockSession Stocks{get=>_stocks;}
-    public DatabaseManager Manager{get=>_manager;}
 
 }

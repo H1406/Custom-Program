@@ -37,7 +37,7 @@ namespace StockApp
                             context.SetState(new FollowState((FollowPage) follow,(HomePage) home,(DetailPage) detail));
                             break;
                         case Page_type.detail:
-                            context.SetState(new DetailState((DetailPage)detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current),(FollowPage)follow,(WalletPage)wallet));
+                            context.SetState(new DetailState((DetailPage)detail,new StockItem(item.Name, item.X, item.Y, item.High, item.Low, item.Open, item.Current,item.Quantity),(FollowPage)follow,(WalletPage)wallet));
                             break;
                         case Page_type.wallet:
                             context.SetState(new WalletState((WalletPage)wallet));
