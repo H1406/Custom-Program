@@ -30,7 +30,7 @@
             "windows": {
                 "console": "externalTerminal",
                 "env": {
-                    "PATH": "${env:PATH};${env:HOME}\\.splashkit\\lib"
+                    "PATH": "${env:PATH};${env:HOME}/.splashkit/lib"
                 }
             }
         }

@@ -28,7 +28,7 @@ public class StockItem:Item{
     public override void Draw()
     {
         if (IsHovered()){
-            FillRectangle(RGBColor(128,128,128), X, Y, Width, Height);
+            FillRectangle(RGBColor(128,128,128), X, Y, Width+10, Height);
         }
         DrawText(Name,ColorWhite(),FontName,TextSize, X+20, Y+20);
         DrawText($"High: {_high}",ColorWhite(),FontName,TextSize, X+70, Y+20);

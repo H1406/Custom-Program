@@ -11,8 +11,8 @@ public class HomePage:Page{
     private static readonly object _lock = new object();
 
     private HomePage(){
-        // Load();
-        Stocks.AddStock(sample, 52);
+        Load();
+        // Stocks.AddStock(sample, 52);
     }
     public static HomePage GetInstance(){
         if (_instance == null){
