@@ -10,6 +10,7 @@ namespace StockApp
     {
         private static SplashKitSDK.Color Background = RGBColor(64, 64, 64);
         public static void Main(){
+            LoadFont("Arial","arial.ttf");
             Page home = PageFactory.CreatePage("home");
             Page follow = PageFactory.CreatePage("follow");
             Page detail = PageFactory.CreatePage("detail");

@@ -10,7 +10,7 @@ public class CSVReader{
             while (!reader.EndOfStream){
                 string line = reader.ReadLine();
                 string[] values = line.Split(',');
-                string PriceStr = values[4].Trim('"');
+                string PriceStr = values[1].Replace("$","");
                 double price = double.Parse(PriceStr, NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture);
                 prices.Add(price);
             }

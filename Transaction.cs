@@ -9,8 +9,8 @@ public class Transaction:Item{
     private Button _cancelButton;
     public Transaction(float x, float y, int width, int height):base(x,y,width,height){
         _input = new TextInput(x+10,y+20,width-20,30);
-        _confirmButton = new Button("confirm",x+20,y+60,70,20);
-        _cancelButton = new Button("cancel",x+width-70,y+60,55,20);
+        _confirmButton = new Button("confirm",x+20,y+60);
+        _cancelButton = new Button("cancel",x+width-70,y+60);
     }
     public  override void Draw(){
         FillRectangle(RGBColor(128,128,128), X, Y, Width, Height);

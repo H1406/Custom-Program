@@ -16,7 +16,7 @@ namespace StockApp
             _detail = detail;
             _detail.Item = item;
             _follow = follow;
-            _wallet = wallet;   
+            _wallet = wallet;
             _nextState = Page_type.detail; 
         }
         public void Draw(){
@@ -41,8 +41,12 @@ namespace StockApp
                     if (_detail.BuyButton.IsClicked(MouseX(),MouseY())){
                         _detail.IsBuy = true;
                     }
-                    if (_detail.SellButton.IsClicked(MouseX(),MouseY())){
+                    else if (_detail.SellButton.IsClicked(MouseX(),MouseY())){
                         _detail.IsSell = true;
+                    }
+                    else{
+                        _detail.IsBuy = false;
+                        _detail.IsSell = false;
                     }
                 }
                 if(_detail.Transaction.ConfirmButton.IsClicked(MouseX(),MouseY()) && _detail.IsBuy){
@@ -97,6 +101,5 @@ namespace StockApp
         public  StockItem GetItem(){
             return _detail.Item;
         }
-        
     }
 }

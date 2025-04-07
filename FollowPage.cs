@@ -22,7 +22,7 @@ public class FollowPage : Page{
     }
 
     public FollowPage(){
-        Load();
+        // Load();
     }
     public void Load(){
         _manager.LoadData().Wait();
@@ -30,7 +30,7 @@ public class FollowPage : Page{
     }
 
     public override void Draw(){
-        DrawText("Following Stocks",ColorWhite(),"Arial",50, 400, 20);
+        DrawText("Following Stocks",ColorWhite(),"Arial",20, 400, 17);
         Rectangle subWindow = new Rectangle(){
             X = 110,
             Y = 40,

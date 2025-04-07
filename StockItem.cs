@@ -1,7 +1,7 @@
 using System;
 using static SplashKitSDK.SplashKit;
 public class StockItem:Item{
-    private static int TextSize = 20;
+    private static int TextSize = 15;
     private static string FontName = "Arial";
     private double _high;
     private double _low;

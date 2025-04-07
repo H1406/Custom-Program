@@ -11,7 +11,7 @@ public class WalletPage:Page{
     private DepositButton _depositbutton = new DepositButton("Deposit", 110, 80);
     private WithDrawButton _withdrawbutton = new WithDrawButton("Withdraw", 210, 80);
     private WalletPage(){
-        Load();
+        // Load();
     }
     public static WalletPage GetInstance(){
         if (_instance == null){

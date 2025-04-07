@@ -4,19 +4,15 @@ using System.Drawing;
 public class Button:Item
 {
     private Bitmap? _bitmap = null;
-    private const string  FontName = "Aptos"; 
+    private const string  FontName = "Arial"; 
     public Button(string name,float x, float y,string filename):base(name,x,y){
         _bitmap = LoadBitmap(name, filename);
         Width = 100;
         Height = 100;   
     }
     public Button(string text, float x, float y):base(text,x,y){
-        Width = 70;
-        Height = 30;
-    }
-    public Button(string text, float x, float y, int width, int height):base(text,x,y){
-        Width = width;
-        Height = height;
+        Width = TextWidth(text, FontName, 20)+10;  
+        Height = TextHeight(text, FontName, 20)+5;
     }
     public override bool IsClicked(float mousex, float mousey)
     {
@@ -31,7 +27,7 @@ public class Button:Item
         }
         if (_bitmap == null){
             DrawRectangle(ColorWhite(), X, Y, Width, Height);
-            DrawText(Name,ColorWhite(),FontName,Height - 10, X+6, Y+10);
+            DrawText(Name,ColorWhite(),FontName,20, X+5, Y);
         }
         else DrawBitmap(_bitmap, X, Y);
     }

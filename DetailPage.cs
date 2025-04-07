@@ -38,7 +38,7 @@ public class DetailPage:Page{
             Rectangle subWindow = new Rectangle(){
                 X = 120,
                 Y = 95,
-                Width = 400,
+                Width = 420,
                 Height = 200,
             };
             SetClip(subWindow);
@@ -51,7 +51,7 @@ public class DetailPage:Page{
             Rectangle subWindow1 = new Rectangle(){
                 X = 120,
                 Y = 345,
-                Width = 400,
+                Width = 420,
                 Height = 200,
             };
             SetClip(subWindow1);

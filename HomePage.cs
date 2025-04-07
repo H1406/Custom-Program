@@ -5,14 +5,14 @@ public class HomePage:Page{
     private StockSession _stockSession = new StockSession();
     private TextInput _searchBar = new TextInput( 350, 10,200,22);
     private bool _isLoading = false;
-    private StockItem sample = new StockItem("TSLA", 100, 100, 100, 100, 100, 100);
+    private StockItem sample = new StockItem("AAPL", 100, 100, 100, 100, 100, 100);
     private string[] topStocks = ["AAPL","GOOG","TSLA","AMZN","EBAY","NVDA","META"];
     private static HomePage _instance;
     private static readonly object _lock = new object();
 
     private HomePage(){
-        Load();
-        // Stocks.AddStock(sample, 52);
+        // Load();
+        Stocks.AddStock(sample, 52);
     }
     public static HomePage GetInstance(){
         if (_instance == null){
@@ -50,7 +50,7 @@ public class HomePage:Page{
     public void Load(){
         _isLoading = true;
         foreach (string stock in topStocks){
-            Stocks.AddStock(Manager.LoadStock(stock), 0);
+            Stocks.AddStock(Manager.LoadStock(stock), 52);
         }
         _isLoading = false;
     }

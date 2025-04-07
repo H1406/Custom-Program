@@ -5,14 +5,14 @@ using System.IO;
 public class Wallet: Item
 {
     private static string FontName = "Arial";
-    private static int TextSize = 50;
+    private static int TextSize = 20;
     private DatabaseManager _manager = new DatabaseManager();
     private List<StockItem> _stocks = new List<StockItem>();
     private double total = 0;
     private double cash = 0;
     private const string filepath = "wallet.txt";
     public Wallet(float x,float y):base(x,y){
-        Load();
+        // Load();
     }
     public override void Draw()
     {
