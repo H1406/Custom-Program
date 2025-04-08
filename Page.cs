@@ -1,6 +1,7 @@
 using System;
 using static SplashKitSDK.SplashKit;
 public abstract class Page{
+    /// Base class for all pages in the application
     private NavigationBar _navBar = new NavigationBar(100, 0);  
     private VerticalScrollbar _scrollBar = new VerticalScrollbar( 790, 0);
     private DatabaseManager _manager = new DatabaseManager();

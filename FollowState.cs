@@ -36,23 +36,20 @@ namespace StockApp
                     _nextState = Page_type.wallet;
                 }
 
-                StockItem stock = _follow.Stocks.StockClicked(MouseX(), MouseY());
-                StockItem itemDeleted = _follow.Stocks.Buttons.StockDelete(MouseX(), MouseY());
-                if (itemDeleted != null)
-                {
-                    _follow.Stocks.RemoveStock(itemDeleted);
-                    _follow.Manager.RemoveStock(itemDeleted);
-                }   
-                if (stock != null)
-                {
-                    _nextState = Page_type.detail;
-                }
                 _itemSearched = _follow.Stocks.StockClicked(MouseX(), MouseY());
                 if (_itemSearched != null)
                 {
                     _detail.Graph = new Graph(_itemSearched.Name,120,300);
                     _nextState = Page_type.detail;
                 }
+                StockItem itemDeleted = _follow.Stocks.Buttons.StockDelete(MouseX(), MouseY());
+                if (itemDeleted != null)
+                {
+                    _follow.Stocks.RemoveStock(itemDeleted);
+                    _follow.Manager.RemoveStock(itemDeleted);
+                    _nextState = Page_type.following;
+                }   
+                
             }
         }
 

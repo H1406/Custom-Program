@@ -13,7 +13,7 @@ public class Transaction:Item{
         _cancelButton = new Button("cancel",x+width-70,y+60);
     }
     public  override void Draw(){
-        FillRectangle(RGBColor(128,128,128), X, Y, Width, Height);
+        FillRectangle(ColorBlack(), X, Y, Width, Height);
         _confirmButton.Draw();
         _cancelButton.Draw();
         _input.Draw();

@@ -27,7 +27,7 @@ public class TextInput:Item{
         }
     }
     public void HandleUserInput(){
-        LoadFont("input","arial.ttf");
+        LoadFont("Arial","arial.ttf");
         if (_isActivate){
             if(!ReadingText()){
                 StartReadingText(rect);
@@ -37,6 +37,7 @@ public class TextInput:Item{
             }  
         }else _inputTerm = "";
     }
+    //Activate and Deactivate the text input
     public void Activate(){
         _isActivate = true;
     }

@@ -7,6 +7,7 @@ public class ButtonSession{
     public ButtonSession(){
     }
     public void AddButton(StockItem stock){
+        //Generate add and delete buttons
         AddButton add_button = new AddButton(stock.Name,720,stock.Y+17,"images/add.png",stock);
         DeleteButton del_button = new DeleteButton(stock.Name,755,stock.Y+17,"images/delete.png",stock);
         _addbuttons.Add(add_button);

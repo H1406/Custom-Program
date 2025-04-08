@@ -22,10 +22,11 @@ public class FollowPage : Page{
     }
 
     public FollowPage(){
-        // Load();
+        Load();
     }
     public void Load(){
         _manager.LoadData().Wait();
+        Console.WriteLine(_manager.Stocks.Count);
         _stocks.LoadStocks(_manager.Stocks);
     }
 
@@ -47,11 +48,9 @@ public class FollowPage : Page{
     public void SaveStock(StockItem stock){
         foreach (StockItem _stock in _stocks.Stocks){
             if (_stock.Name == stock.Name){
-                Console.WriteLine($"Stock {stock.Name} already exists!");
                 return;
             }
         }
-        Console.WriteLine($"Stock {stock.Name} saved successfully!");
         _manager.SaveStock(stock);
     }
     public override void Update(){

@@ -86,7 +86,8 @@ public class Analyzer{
     }  
     public string ExecuteStrategy(double currentPrice){
         _tradingContext = new TradingContext();
-        double avgFuturePrice = predictedPrices.Average(); // Compute only once!
+        double avgFuturePrice = predictedPrices.Average(); 
+        //Execute trading strategy based on average future price
         if (avgFuturePrice > currentPrice * 1.05)
         {
             _tradingContext.SetStrategy(new BuyStrategy());

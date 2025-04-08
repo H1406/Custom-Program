@@ -36,9 +36,6 @@ public class Graph : Item
             double x1 = X+420 - i * Width-(_scrollBar.GetScrollValue()-1)*prices.Count*Width;
             double x2 = X+420 - (i+1) * Width-(_scrollBar.GetScrollValue()-1)*prices.Count*Width;
             double y2 = prices[i+1];
-            if(i == 9){
-                DrawLine(ColorWhite(),x1, Y - (y1-minPrice) / (maxPrice-minPrice) * Height, X+420, Y - (prices[0]-minPrice) / (maxPrice-minPrice) * Height);
-            }
             if(y1 > y2){
             DrawLine(ColorGreen(), x1, Y - (y1-minPrice) / (maxPrice-minPrice) * Height, x2, Y - (y2-minPrice) / (maxPrice-minPrice) * Height);
             }else if(y1 < y2){

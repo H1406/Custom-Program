@@ -49,6 +49,7 @@ public abstract class Item{
             _name = value;
         }
     }
+    //Check if the item is hovered
     public virtual bool IsHovered(){
         float mousex = MouseX();
         float mousey = MouseY();
@@ -59,6 +60,7 @@ public abstract class Item{
     }
     public int Height{get=>_height;set=>_height = value;}
     public int Width{get=>_width;set=>_width = value;}
+    //Check if the item is clicked
     public virtual bool IsClicked(float mousex,float mousey ){
         if( mousex >= X && mousex <= Width + X && mousey >= Y && mousey <= Y + Height){
             return true;

@@ -7,7 +7,7 @@ public class DetailPage:Page{
     private bool _isSell = false;
     private StockItem? _item;
     private Graph? _graph;
-    private Graph _predictGraph;
+    private Graph? _predictGraph;
     private Button _analyzebutton  = new Button("Analyze", 600, 100);
     private Button _buybutton = new Button("Buy", 570, 200);
     private Button _sellbutton = new Button("Sell",650, 200);
@@ -30,7 +30,7 @@ public class DetailPage:Page{
     public override void Draw(){
         SetUp();
         NavigationBar.Draw();
-        _item.Draw();
+        _item.DrawWithQuant();
         _analyzebutton.Draw();
         _buybutton.Draw();
         _sellbutton.Draw();

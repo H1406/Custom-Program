@@ -1,4 +1,5 @@
 public class TradingContext{
+    ///Used to set the strategy for trading
     private ITradingStrategy _strategy;
     public TradingContext(){
     }

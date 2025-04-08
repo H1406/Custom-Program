@@ -11,7 +11,7 @@ public class WalletPage:Page{
     private DepositButton _depositbutton = new DepositButton("Deposit", 110, 80);
     private WithDrawButton _withdrawbutton = new WithDrawButton("Withdraw", 210, 80);
     private WalletPage(){
-        // Load();
+        Load();
     }
     public static WalletPage GetInstance(){
         if (_instance == null){
@@ -63,6 +63,17 @@ public class WalletPage:Page{
         _stockSession.Update(ScrollBar.GetScrollValue());
         ScrollBar.Update();
     }
+    ///Deposit and Withdraw or Buy and Sell Functions
+    public void Buy(StockItem stock, string amount){
+        wallet.Buy(stock,amount);
+        _stockSession.Stocks.Clear();
+        Load();
+    }
+    public void Sell(StockItem stock, string amount){
+        wallet.Sell(stock,amount);
+        _stockSession.Stocks.Clear();
+        Load();
+    }
     public DepositButton Deposit{
         get=>_depositbutton;
     }
@@ -74,6 +85,9 @@ public class WalletPage:Page{
     }
     public StockSession Stocks{
         get=>_stockSession;
+        set{
+            _stockSession = value;
+        }
     }
     public Wallet Wallet{get=>wallet;}
 }

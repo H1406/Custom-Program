@@ -65,7 +65,7 @@ public class StockSession
     }
     public void DrawWithNoButtons(){
         foreach(StockItem stock in _stocks){
-            stock.Draw();
+            stock.DrawWithQuant();
         }
     }
     public void Update(float delta){

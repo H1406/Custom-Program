@@ -6,6 +6,7 @@ public class Button:Item
     private Bitmap? _bitmap = null;
     private const string  FontName = "Arial"; 
     public Button(string name,float x, float y,string filename):base(name,x,y){
+        //Setup button with title, x, y, filename
         _bitmap = LoadBitmap(name, filename);
         Width = 100;
         Height = 100;   

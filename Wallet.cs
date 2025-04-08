@@ -12,13 +12,13 @@ public class Wallet: Item
     private double cash = 0;
     private const string filepath = "wallet.txt";
     public Wallet(float x,float y):base(x,y){
-        // Load();
+        Load();
     }
     public override void Draw()
     {
         DrawText("Portfolio",ColorWhite(),FontName,TextSize, X+300, Y+20);
-        DrawText($"Total: {total}$",ColorWhite(),FontName,TextSize, X+20, Y+50);
-        DrawText($"Cash: {cash}$",ColorWhite(),FontName,TextSize, X+200, Y+50);
+        DrawText($"Total: {total:F2}$",ColorWhite(),FontName,TextSize, X+20, Y+50);
+        DrawText($"Cash: {cash:F2}$",ColorWhite(),FontName,TextSize, X+200, Y+50);
     }
     public void Load(){
         _manager.GetWallet().Wait();
@@ -50,15 +50,37 @@ public class Wallet: Item
             Console.WriteLine("Insufficient funds");
             Console.WriteLine($"You need {stock.Current * Convert.ToInt32(amount)}");
             FadeMusicIn(new Music("invalid","invalid.mp3"),1000);
-            return;
+        }
+        bool found = false;
+        foreach (StockItem _stock in _stocks){
+            if (_stock.Name == stock.Name){
+                stock = _stock;
+                found = true;
+                break;
+            }
+        }
+        if(!found){
+            Console.WriteLine("Stock not found in wallet");
+            _stocks.Add(stock);
+            stock.Quantity = 0;
+            _manager.SaveStock(stock);
         }
         cash -= stock.Current * Convert.ToInt32(amount);
         total -= stock.Current * Convert.ToInt32(amount);
         stock.Quantity += Convert.ToInt32(amount);
         SaveQuant(stock);
         SaveMoney();
+        _stocks.Clear();
+        _manager.GetWallet().Wait();
+        _stocks = _manager.Stocks;
     }
     public void Sell(StockItem stock,string amount){
+        foreach (StockItem _stock in _stocks){
+            if (_stock.Name == stock.Name){
+                stock = _stock;
+                break;
+            }
+        }
         if (stock.Quantity < Convert.ToInt32(amount)){
             Console.WriteLine("Insufficient stock");
             FadeMusicIn(new Music("invalid","invalid.mp3"),1000);

@@ -6,13 +6,12 @@ public class HomePage:Page{
     private TextInput _searchBar = new TextInput( 350, 10,200,22);
     private bool _isLoading = false;
     private StockItem sample = new StockItem("AAPL", 100, 100, 100, 100, 100, 100);
-    private string[] topStocks = ["AAPL","GOOG","TSLA","AMZN","EBAY","NVDA","META"];
+    private string[] topStocks = ["AAPL","GOOG","TSLA","AMZN","EBAY","NVDA","META","INTC"];
     private static HomePage _instance;
     private static readonly object _lock = new object();
 
     private HomePage(){
-        // Load();
-        Stocks.AddStock(sample, 52);
+        Load();
     }
     public static HomePage GetInstance(){
         if (_instance == null){

@@ -2,14 +2,18 @@ using StockApp;
 using static SplashKitSDK.SplashKit;
 using SplashKitSDK;
 
-public class WalletState(WalletPage wallet):IAppState{
+public class WalletState(WalletPage wallet,DetailPage detail):IAppState{
     private WalletPage _wallet = wallet;
+    private DetailPage _detail = detail;
     private StockItem? itemClicked = null;
     private Page_type _nextState = Page_type.wallet;
     public void HandleInput(){
         if (MouseClicked(MouseButton.LeftButton)){
             itemClicked = _wallet.Stocks.StockClicked(MouseX(),MouseY());
-            if(itemClicked != null) _nextState = Page_type.detail;
+            if(itemClicked != null){
+                _detail.Graph = new Graph(itemClicked.Name,120,300);
+                _nextState = Page_type.detail;
+            } 
             if(_wallet.Deposit.IsClicked(MouseX(),MouseY())) _wallet.Withdraw.IsSelected = false;
             if(_wallet.Withdraw.IsClicked(MouseX(),MouseY())) _wallet.Deposit.IsSelected = false;
             string pageClicked = _wallet.NavigationBar.PageClicked();
@@ -22,16 +26,16 @@ public class WalletState(WalletPage wallet):IAppState{
         }
         if (KeyTyped(KeyCode.ReturnKey)){
             string searchTerm = _wallet.InputTerm;
-            if (searchTerm != null){
+            if (searchTerm != ""){
                 if (_wallet.Deposit.IsSelected){
                     _wallet.Wallet.Deposit(searchTerm);
-                    _wallet.Deposit.IsSelected = false;
                 }
                 if (_wallet.Withdraw.IsSelected){
                     _wallet.Wallet.Withdraw(searchTerm);
-                    _wallet.Withdraw.IsSelected = false;
                 }
             }
+            _wallet.Deposit.IsSelected = false;
+            _wallet.Withdraw.IsSelected = false;
         }
     }
     public void Update(){
